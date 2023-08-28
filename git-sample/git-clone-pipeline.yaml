@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: gitclonepipeline
+spec:
+  description: >-
+    This task can be used to perform git operation.
+    For example to git clone from git server use token and put in workspace
+  workspaces:
+    - name: shared-data
+  tasks:
+    - name: gitclone
+      taskRef:
+        name: gitclone
+      workspaces:
+        - name: output
+          workspace: shared-data

@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: gitclone
+spec:
+  description: >-
+    This task can be used to perform git operation.
+    For example to git clone from git server use token
+  workspaces:
+    - name: repo
+      mountPath: /workspace/repo
+  steps:
+    - name: gitclone
+      image: public.ecr.aws/docker/library/maven:amazoncorretto
+      workspaces:
+        - name: repo
+      # please replace your git url
+      script: |
+        mvn -v
+        yum install git -y
+        git clone <git_url>
+        sleep 600
