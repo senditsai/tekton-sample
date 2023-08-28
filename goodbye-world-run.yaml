@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: goodbye-task-run
+spec:
+  params:
+    - name: username
+      type: string
+  taskRef:
+    name: goodbye
+  params:
+  - name: username
+    value: $(params.username)

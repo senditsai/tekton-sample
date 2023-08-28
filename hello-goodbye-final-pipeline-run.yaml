@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: hello-goodbye-final-run
+spec:
+  pipelineRef:
+    name: hello-goodbye-final
+  params:
+  - name: username
+    value: "Tekton"
+  - name: commit
+    value: "4567uH678uhgt"
+  - name: message
+    value: "bug fix"

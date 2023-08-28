@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: final 
+spec:
+  params:
+  - name: message
+    type: string
+  - name: commit
+    description: git commit
+  steps:
+    - name: final
+      image: alpine
+      script: |
+        echo "The git is $(params.commit) and message is $(params.message)!"
