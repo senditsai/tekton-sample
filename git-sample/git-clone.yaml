@@ -9,14 +9,14 @@ spec:
   workspaces:
     - name: repo
       mountPath: /workspace/repo
+  params:
+    - name: url
   steps:
     - name: gitclone
-      image: public.ecr.aws/docker/library/maven:amazoncorretto
-      workspaces:
-        - name: repo
-      # please replace your git url
+      image: public.ecr.aws/docker/library/maven:3.9.4-amazoncorretto-17
+      workingDir: /workspace/repo
       script: |
         mvn -v
         yum install git -y
-        git clone <git_url>
-        sleep 600
+        git clone $(params.url)
+        mvn clean package -DskipTests -Dcheckstyle.skip -f spring-petclinic/pom.xml

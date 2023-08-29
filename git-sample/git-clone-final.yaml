@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-clone-final
+spec:
+  description: >-
+    cleanup workspace
+  steps:
+    - name: delete-pvc
+      image: bitnami/kubectl
+      args:
+        - "delete"
+        - "pvc"
+        - "$(PVC_NAME)"
+      env:
+        - name: PVC_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tekton.dev/pipelineRun']
