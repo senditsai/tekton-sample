@@ -6,16 +6,18 @@ spec:
   description: >-
     This task can be used to perform git operation.
     For example to git clone from git server use token and put in workspace
+  params:
+  - name: url
+    type: string
   workspaces:
     - name: pipeline-ws
   tasks:
     - name: gitclone
       taskRef:
         name: gitclone
+      params:
+      - name: url
+        value: $(params.url)
       workspaces:
         - name: repo
           workspace: pipeline-ws
-  finally:
-    - name: cleanup-workspace
-      taskRef:
-        name: git-clone-final
